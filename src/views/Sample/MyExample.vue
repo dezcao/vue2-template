@@ -194,6 +194,52 @@
               <b-button variant="primary" size="sm" @click="addArray(question, question_type1)">문항 추가하기</b-button>
 
             </b-card-text>
+            
+            <b-card-text>
+              <b-table 
+                  :fields="operator_fields"
+                  :items="operator_items" 
+                  selectable
+                  select-mode="multi"
+                  @row-selected="onRowSelected"
+                  ref="selectableTable"
+                  small bordered head-variant="light">
+
+                  <template #head(selected)="scope">
+                      <div class="text-center">
+                          <b-form-checkbox 
+                              v-model="operator_all" 
+                              :indeterminate="operator_indeterminate"
+                              @change="toggleAll"> {{ scope.label }}</b-form-checkbox>
+                      </div>
+                  </template>
+                    
+                  <template #cell(selected)="row">
+                      <template v-if="row.rowSelected">
+                          <div class="text-center">
+                              <b-form-checkbox v-model="row.rowSelected" 
+                                @change="checked(row.index, row.rowSelected, 'selectableTable')">{{row.index}}</b-form-checkbox>
+                          </div>
+                      </template>
+                      <template v-else>
+                          <div class="text-center">
+                              <b-form-checkbox v-model="row.rowSelected" 
+                                  @change="checked(row.index, row.rowSelected, 'selectableTable')">{{row.index}}</b-form-checkbox>
+                          </div>
+                      </template>
+                  </template>
+              </b-table>
+              <b-pagination
+                  v-model="operator_pagination.current_page"
+                  :total-rows="operator_pagination.total_count"
+                  :per-page="operator_pagination.limit"
+                  align="center"
+                  size="sm"
+                  class="my-0"
+                  @change="paginationFn($event, 'Operate')"
+              ></b-pagination>
+                
+            </b-card-text>
           </b-card>
         </b-col>
       </b-row>
@@ -252,8 +298,108 @@ export default {
       question: [{"title":"만족하십니까", "case":["매우만족","만족","불만족"]}],
       question_type1: { title: '', case: [] },
       /** 설문문항 추가하기 */
+      
+      /** 테이블 체크박스 및 페이지네이션 */
+      operator_items: [
+        {
+            id: 1,
+            name: 'hello name',
+            email: 'hello@inowing.com',
+            part: '개발팀',
+            grade: '과장',
+            created_at: '2020-04-16',
+            invited_at: '2020-04-16',
+            passcode: 'zepd1235'
+        },
+        {
+            id: 2,
+            name: 'hello name',
+            email: 'hello@inowing.com',
+            part: '개발팀',
+            grade: '과장',
+            created_at: '2020-04-16',
+            invited_at: '2020-04-16',
+            passcode: 'zepd1235'
+        },
+        {
+            id: 3,
+            name: 'hello name',
+            email: 'hello@inowing.com',
+            part: '개발팀',
+            grade: '과장',
+            created_at: '2020-04-16',
+            invited_at: '2020-04-16',
+            passcode: 'zepd1235'
+        },
+        {
+            id: 4,
+            name: 'hello name',
+            email: 'hello@inowing.com',
+            part: '개발팀',
+            grade: '과장',
+            created_at: '2020-04-16',
+            invited_at: '2020-04-16',
+            passcode: 'zepd1235'
+        },
+        {
+            id: 5,
+            name: 'hello name',
+            email: 'hello@inowing.com',
+            part: '개발팀',
+            grade: '과장',
+            created_at: '2020-04-16',
+            invited_at: '2020-04-16',
+            passcode: 'zepd1235'
+        },
+        {
+            id: 6,
+            name: 'hello name',
+            email: 'hello@inowing.com',
+            part: '개발팀',
+            grade: '과장',
+            created_at: '2020-04-16',
+            invited_at: '2020-04-16',
+            passcode: 'zepd1235'
+        },
+      ],
+      operator_fields: [
+        {key: 'selected', label: 'No'},
+        {key: 'name', label: '이름'},
+        {key: 'email', label: '이메일'},
+        {key: 'part', label: '소속'},
+        {key: 'grade', label: '직책'},
+        {key: 'created_at', label: '생성시간'},
+        {key: 'invited_at', label: '초대시간'},
+        {key: 'passcode', label: 'passcode'}
+      ],
+      operator_pagination: {
+        "total_count": 6,
+        "count_pages": 1,
+        "current_page": 1,
+        "limit": 5
+      },
+      operator_allSelected: [],
+      operator_all: false,
+      operator_indeterminate: false,
+      /** 테이블 체크박스 및 페이지네이션 */
 
     };
+  },
+  watch: {
+    operator_allSelected (newValue, oldValue) {
+      // Handle changes in individual flavour checkboxes
+      console.log(newValue, oldValue);
+      if (newValue.length === 0) {
+        this.operator_indeterminate = false
+        this.operator_all = false
+      } else if (newValue.length === this.operator_items.length) {
+        this.operator_indeterminate = false
+        this.operator_all = true
+      } else {
+        this.operator_indeterminate = true
+        this.operator_all = false
+      }
+    }
   },
   computed: {
     criteria() {
@@ -273,6 +419,9 @@ export default {
       }
       return options;
     },
+  },
+  mounted() {
+    this.set_lang_option_values();
   },
   methods: {
     messageOpen: function (key) {
@@ -407,7 +556,7 @@ export default {
       // console.log("editor ready!", quill);
     },
     
-addArray: function (array, new_item) {
+    addArray: function (array, new_item) {
       function cloneObject(obj) {
           var clone = {};
           for (var key in obj) {
@@ -424,12 +573,38 @@ addArray: function (array, new_item) {
       }
       let clone = cloneObject(new_item);
       array.push(clone);
+    },
+    
+    paginationFn: async function(requestPage, type) {
+        // await getOperationList()
+        console.log('requestPage ', requestPage, type);
+    },
+    onRowSelected(items) {
+        this.operator_allSelected = items
+    },
+    selectAllRows() {
+        this.$refs.selectableTable.selectAllRows()
+    },
+    clearSelected() {
+        this.$refs.selectableTable.clearSelected()
+    },
+    checked(index, checked, selectableTable) {
+        let tableRef = this.$refs[selectableTable]
+        // to select all use tableRef.selectAllRows()
+        // to see all availabe table properties just do a console.log(tableRef)
+        if (checked === true){
+            tableRef.selectRow(index)
+        } else {
+            tableRef.unselectRow(index)
+        }
+    },
+    toggleAll(checked) {
+        this.operator_all = checked;
+        checked ? this.selectAllRows() : this.clearSelected();
     }
 
   },
-  mounted() {
-    this.set_lang_option_values();
-  },
+  
 };
 </script>
 <style scoped>
