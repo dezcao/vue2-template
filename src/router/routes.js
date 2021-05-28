@@ -1,8 +1,6 @@
 import MainLayout from '@/views/Layout/MainLayout.vue';
 import AuthLayout from '@/views/Pages/AuthLayout.vue';
 
-import NotFound from '@/views/NotFoundPage.vue';
-
 const routes = [
   {
     path: '/',
@@ -76,10 +74,21 @@ const routes = [
         path: '/register',
         name: 'register',
         component: () => import(/* webpackChunkName: "demo" */ '../views/Pages/Register.vue')
-      },
-      { path: '*', component: NotFound }
+      }
     ]
-  }
+  },
+  {
+    path: '/error-404',
+    name: 'error-404',
+    component: () => import(/* webpackChunkName: "demo" */ '../views/NotFoundPage.vue'),
+    meta: {
+      layout: 'full',
+    },
+  },
+  {
+    path: '*',
+    redirect: 'error-404',
+  },
 ];
 
 export default routes;
