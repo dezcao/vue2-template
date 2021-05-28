@@ -103,7 +103,7 @@
         return this.$rtl.isRTL;
       }
     },
-    data() {
+    data: function() {
       return {
         activeNotifications: false,
         showMenu: false,

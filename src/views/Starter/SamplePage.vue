@@ -83,7 +83,7 @@
       StatsCard,
       RouteBreadCrumb
     },
-    data() {
+    data: function() {
       return {};
     }
   };

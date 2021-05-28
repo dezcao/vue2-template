@@ -131,7 +131,7 @@
         description: 'Custom notification click handler'
       }
     },
-    data() {
+    data: function() {
       return {
         elmHeight: 0
       };

@@ -63,7 +63,7 @@ export default {
       return this.id || this.title;
     }
   },
-  data() {
+  data: function() {
     return {
       active: false
     };

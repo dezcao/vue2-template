@@ -33,7 +33,7 @@
         default: false
       }
     },
-    data() {
+    data: function() {
       return {
         notifications: this.$notifications.state
       };
@@ -43,7 +43,7 @@
         this.$notifications.removeNotification(timestamp);
       }
     },
-    created() {
+    create: function() {
       this.$notifications.settings.overlap = this.overlap;
     },
     watch: {

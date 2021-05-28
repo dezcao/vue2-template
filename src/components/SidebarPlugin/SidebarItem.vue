@@ -101,7 +101,7 @@ export default {
       default: true
     }
   },
-  data() {
+  data: function() {
     return {
       children: [],
       collapsed: true

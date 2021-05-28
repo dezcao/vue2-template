@@ -99,7 +99,7 @@ export default {
       return this.capitalizeFirstLetter(name);
     }
   },
-  data() {
+  data: function() {
     return {
       activeNotifications: false,
       showMenu: false,

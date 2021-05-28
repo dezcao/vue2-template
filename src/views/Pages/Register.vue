@@ -99,7 +99,7 @@
 
   export default {
     name: 'register',
-    data() {
+    data: function() {
       return {
         model: {
           name: '',

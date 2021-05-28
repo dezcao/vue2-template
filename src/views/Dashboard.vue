@@ -158,7 +158,7 @@
       PageVisitsTable,
       SocialTrafficTable
     },
-    data() {
+    data: function() {
       return {
         bigLineChart: {
           allData: [

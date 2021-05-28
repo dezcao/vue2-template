@@ -116,7 +116,7 @@
 </template>
 <script>
 export default {
-  data() {
+  data: function() {
     return {
       user: {
         company: 'Creative Code Inc.',

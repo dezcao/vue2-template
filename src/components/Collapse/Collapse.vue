@@ -38,7 +38,7 @@ export default {
       deactivateAll: this.deactivateAll
     };
   },
-  data() {
+  data: function() {
     return {
       items: []
     };

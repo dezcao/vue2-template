@@ -52,7 +52,7 @@
       [DropdownItem.name]: DropdownItem,
       [DropdownMenu.name]: DropdownMenu,
     },
-    data() {
+    data: function() {
       return {
         tableData: [
           {

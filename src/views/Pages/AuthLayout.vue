@@ -103,7 +103,7 @@
         default: 'black'
       }
     },
-    data() {
+    data: function() {
       return {
         showMenu: false,
         menuTransitionDuration: 250,

@@ -10,7 +10,7 @@ export default {
       default: () => ({})
     }
   },
-  data() {
+  data: function() {
     return {
       ctx: null
     };

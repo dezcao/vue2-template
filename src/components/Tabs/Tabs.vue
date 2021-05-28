@@ -101,7 +101,7 @@ export default {
     centered: Boolean,
     value: String
   },
-  data() {
+  data: function() {
     return {
       tabs: []
     };

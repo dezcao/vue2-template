@@ -83,7 +83,7 @@
       [Table.name]: Table,
       [TableColumn.name]: TableColumn
     },
-    data() {
+    data: function() {
       return {
         projects,
         currentPage: 1

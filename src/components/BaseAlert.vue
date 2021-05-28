@@ -57,7 +57,7 @@
         description: 'Alert icon to display'
       }
     },
-    data() {
+    data: function() {
       return {
         visible: true
       };

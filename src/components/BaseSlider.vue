@@ -48,7 +48,7 @@ export default {
         '[noUi Slider options](https://refreshless.com/nouislider/slider-options/)'
     }
   },
-  data() {
+  data: function () {
     return {
       slider: null
     };

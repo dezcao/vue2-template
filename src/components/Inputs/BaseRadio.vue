@@ -38,7 +38,7 @@
         description: 'Whether radio is inline'
       }
     },
-    data() {
+    data: function() {
       return {
         cbId: ''
       };
@@ -59,7 +59,7 @@
         return '';
       }
     },
-    created() {
+    create: function() {
       this.cbId = Math.random()
         .toString(16)
         .slice(2);

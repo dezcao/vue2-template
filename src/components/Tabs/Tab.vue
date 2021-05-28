@@ -14,7 +14,7 @@ export default {
   name: 'tab-pane',
   props: ['title', 'id'],
   inject: ['addTab', 'removeTab'],
-  data() {
+  data: function() {
     return {
       active: false
     };

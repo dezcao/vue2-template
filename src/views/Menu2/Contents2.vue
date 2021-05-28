@@ -17,7 +17,7 @@
 <script>
 export default {
     components: {},
-    data() {
+    data: function() {
         return {
             items: [{
                     age: 40,

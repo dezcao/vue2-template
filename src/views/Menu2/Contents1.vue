@@ -35,7 +35,7 @@
 <script>
 export default {
     components: {},
-    data() {
+    data: function() {
         return {
             message: 'Hello menu1/content1'
         };

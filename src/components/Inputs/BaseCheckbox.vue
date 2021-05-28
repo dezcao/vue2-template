@@ -44,7 +44,7 @@
         description: 'Checkbox type (e.g info, danger etc)'
       }
     },
-    data() {
+    data: function() {
       return {
         cbId: "",
         touched: false
@@ -68,7 +68,7 @@
         }
       }
     },
-    created() {
+    create: function() {
       this.cbId = Math.random()
         .toString(16)
         .slice(2);

@@ -251,7 +251,7 @@
 
 export default {
   components: {},
-  data() {
+  data: function() {
     return {
       photo: null,
       photo_url: "",

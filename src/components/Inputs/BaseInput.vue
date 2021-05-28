@@ -124,7 +124,7 @@
         default: ''
       }
     },
-    data() {
+    data: function() {
       return {
         focused: false
       };
@@ -138,7 +138,7 @@
           blur: this.onBlur
         };
       },
-      slotData() {
+      slotdata() {
         return {
           focused: this.focused,
           error: this.error,

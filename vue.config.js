@@ -1,5 +1,5 @@
 module.exports = {
-    publicPath: '',
+    publicPath: '/',
     configureWebpack: {
       entry: ["babel-polyfill", "./src/main.js"],
       optimization: {
@@ -24,5 +24,5 @@ module.exports = {
         }
       }
     },
-    // transpileDependencies: ['bootstrap-vue']
+    transpileDependencies: ['vue-chart.js', 'chart.js', 'clipboard.js', 'google-maps.js', 'vue-clipboard2.js']
   }

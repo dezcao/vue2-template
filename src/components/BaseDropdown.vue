@@ -75,7 +75,7 @@ export default {
       default: true
     }
   },
-  data() {
+  data: function() {
     return {
       isOpen: false
     };
