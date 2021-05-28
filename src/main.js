@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import Vue from 'vue'
 import MainPlugin from './plugins/main-plugin';
 import App from './App.vue'
