@@ -139,3 +139,52 @@ package.json add + npm i
 lint block with develop
 --skip-plugins @vue/cli-plugin-eslint
 ```
+
+### error history
+```
+# 1. vue.config.js -> publicPath: '/'로 설정하여 해결.
+Uncaught SyntaxError: Unexpected token <
+
+# 2. vue script1002: 구문 오류 (https://www.programmersought.com/article/4208331093/)
+npm install babel-polyfill --save-dev
+# main.js에 추가
+import 'babel-polyfill'
+# vue.config.js
+configureWebpack: {
+    entry: { app: ["babel-polyfill", "./src/main.js"] }
+}
+# IE11
+data(){}, created() 등을 아래 형태로 바꾼다.
+data: function () {
+    return {}
+}
+```
+
+### error 슈팅 도와주는 설정. vue.config.js 참조
+```
+# 참조 : https://jacklyons.me/how-to-fix-vuejs-not-working-in-ie11/
+configureWebpack: {
+      entry: ["babel-polyfill", "./src/main.js"],
+      optimization: {
+        runtimeChunk: 'single',
+          splitChunks: {
+            chunks: 'all',
+            maxInitialRequests: Infinity,
+            minSize: 0,
+            cacheGroups: {
+              vendor: {
+                test: /[\\/]node_modules[\\/]/,
+                name(module) {
+                // get the name. E.g. node_modules/packageName/not/this/part.js
+                // or node_modules/packageName
+                const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+    
+                // npm package names are URL-safe, but some servers don't like @ symbols
+                return `npm.${packageName.replace('@', '')}`;
+              }
+            }
+          }
+        }
+      }
+    }
+```
