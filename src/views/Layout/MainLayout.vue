@@ -4,6 +4,43 @@
     <side-bar>
       <template slot="links">
         <sidebar-item
+              :link="{
+                name: 'Member',
+                icon: 'ni ni-single-02 text-yellow'
+                }">
+
+          <sidebar-item
+            :link="{
+                name: 'member-list',
+                path: '/member/list'
+                }"
+              >
+          </sidebar-item>
+          <sidebar-item
+            :link="{
+                name: 'member-register',
+                path: '/member/register'
+                }"
+              >
+          </sidebar-item>
+          <sidebar-item
+            :link="{
+                name: 'member-pet-register',
+                path: '/member/pet/register'
+                }"
+              >
+          </sidebar-item>
+        </sidebar-item>
+        <sidebar-item
+            :link="{
+                name: 'reservation',
+                path: '/reservation'
+                }"
+              >
+          </sidebar-item>
+
+
+        <sidebar-item
           :link="{
             name: 'Sample',
             icon: 'ni ni-tv-2 text-primary',
@@ -133,7 +170,6 @@
     </side-bar>
     <div class="main-content">
       <main-navbar :type="$route.meta.navbarType"></main-navbar>
-
       <div @click="$sidebar.displaySidebar(false)">
         <fade-transition :duration="200" origin="center top" mode="out-in">
           <!-- your content here -->
@@ -141,6 +177,7 @@
         </fade-transition>
       </div>
       <content-footer v-if="!$route.meta.hideFooter"></content-footer>
+
     </div>
   </div>
 </template>

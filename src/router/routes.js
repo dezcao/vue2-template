@@ -9,6 +9,27 @@ const routes = [
     children: [
       
       {
+        path: '/member/list',
+        name: 'member-list',
+        component: () => import(/* webpackChunkName: "demo" */ '../views/Member/List.vue'),
+      },
+      {
+        path: '/member/register',
+        name: 'member-register',
+        component: () => import(/* webpackChunkName: "demo" */ '../views/Member/Register.vue'),
+      },
+      {
+        path: '/member/pet/register',
+        name: 'member-pet-register',
+        component: () => import(/* webpackChunkName: "demo" */ '../views/Member/Pet/Register.vue'),
+      },
+      {
+        path: '/reservation',
+        name: 'reservation',
+        component: () => import(/* webpackChunkName: "demo" */ '../views/Reservation.vue'),
+      },
+
+      {
         path: '/sample/my-example',
         name: 'my-example',
         component: () => import(/* webpackChunkName: "demo" */ '../views/Sample/MyExample.vue'),
